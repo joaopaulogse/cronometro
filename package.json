@@ -1,0 +1,19 @@
+{
+  "name": "cronometro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.7.9",
+    "electron-package": "^0.1.0"
+  },
+  "dependencies": {
+    "menubar": "^5.2.3"
+  }
+}
