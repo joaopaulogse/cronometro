@@ -75,7 +75,7 @@
                 <path fill="white" d="M21,17H7V3H21M21,1H7A2,2 0 0,0 5,3V17A2,2 0 0,0 7,19H21A2,2 0 0,0 23,17V3A2,2 0 0,0 21,1M3,5H1V21A2,2 0 0,0 3,23H19V21H3M15.96,10.29L13.21,13.83L11.25,11.47L8.5,15H19.5L15.96,10.29Z" />
             </svg>
         </label>
-        <input type="file" hidden id="image" accept="image/*" onchange="envioImagem(event)">
+        <input type="file" hidden id="image" accept="image/*" multiple onchange="envioImagem(event)">
         <button
             style="background-color: Transparent;
                     background-repeat:no-repeat;
@@ -149,7 +149,22 @@
             }
         }
         function envioImagem(event){
-            document.body.style.background = `url(${URL.createObjectURL(event.target.files[0])}) no-repeat center center fixed`;
+            if(event.target.files.length == 1){
+                styleFundo(event.target.files[0]);
+            }else{
+                let files = event.target.files;
+                let y = 0;
+                let time = setInterval(()=>{
+                    styleFundo(files[y++]);
+                    if(!files[y]){
+                        // clearInterval(time);
+                        y=0;
+                    }
+                },1000);
+            }
+        }
+        function styleFundo(files){
+            document.body.style.background = `url(${URL.createObjectURL(files)}) no-repeat center center fixed`;
             document.body.style.backgroundColor = "black";
             document.body.style.webkitBackgroundSize = "cover";
             document.body.style.backgroundSize = "cover";
