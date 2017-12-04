@@ -66,10 +66,10 @@
         </button>
         <label for="file" style="cursor: pointer;">
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                <path fill="white" d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
+                <path fill="white" d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z" />
             </svg>
         </label>
-        <input type="file" hidden id="file" onchange="envioArquivo(event)">
+        <input type="file" hidden id="file" accept="audio/*,video/*" onchange="envioArquivo(event)">
         <label for="image" style="cursor: pointer;">
             <svg style="width:21px;height:21px" viewBox="0 0 24 24">
                 <path fill="white" d="M21,17H7V3H21M21,1H7A2,2 0 0,0 5,3V17A2,2 0 0,0 7,19H21A2,2 0 0,0 23,17V3A2,2 0 0,0 21,1M3,5H1V21A2,2 0 0,0 3,23H19V21H3M15.96,10.29L13.21,13.83L11.25,11.47L8.5,15H19.5L15.96,10.29Z" />
@@ -149,18 +149,19 @@
             }
         }
         function envioImagem(event){
+            console.log(event.target.files[0])
             if(event.target.files.length == 1){
                 styleFundo(event.target.files[0]);
             }else{
                 let files = event.target.files;
                 let y = 0;
-                let time = setInterval(()=>{
-                    styleFundo(files[y++]);
+                setInterval(()=>{
+                    styleFundo(files[++y]);
                     if(!files[y]){
                         // clearInterval(time);
                         y=0;
                     }
-                },1000);
+                },10000);
             }
         }
         function styleFundo(files){
