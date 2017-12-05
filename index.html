@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cronometro</title>
+    <title>Cronômetro</title>
     <style>
         #cronometro{
             padding: 0px;
@@ -110,11 +110,20 @@
                 reset();
             }
         })
+        // document.getElementById("dropImage").addEventListener('click', (event)=>{
+        //     event.preventDefault()
+        //     event.stopPropagation()
+        //     console.log(event)
+        // })
         function init(){
             window.onkeyup = window.teclado;
             window.onmousemove = window.mouseMove;
             window.onmouseout = window.mouseOut;
             window.ondblclick = window.fullScreen;
+            window.ondrop = window.dropArquivo;
+        }
+        function dropArquivo(event){
+            console.log(event)
         }
         function mouseMove(event){
             if(event){

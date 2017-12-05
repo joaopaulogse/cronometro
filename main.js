@@ -1,6 +1,7 @@
 const electron = require("electron")
 const { app, BrowserWindow,ipcMain, ipcRenderer } = require("electron");
-const menubar = require("menubar")
+const path = require("path");
+// const menubar = require("menubar")
 // let mb = menubar(
 //     {
 //         dir:process.cwd(), 
@@ -17,7 +18,11 @@ let win;
 
 app.on('ready', ()=>{
     const {height,width} = electron.screen.getPrimaryDisplay().workAreaSize
-    win = new BrowserWindow({width, height});
+    win = new BrowserWindow({
+        width, 
+        height, 
+        icon:path.join(__dirname, "64x64.png")
+    });
     ipcMain.on('fullScreen-main', (event, args)=>{
         if(!win.isFullScreen()){
             win.setFullScreen(args.value)
