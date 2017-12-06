@@ -2,6 +2,11 @@
 
 * Electron
 
+> Installing Dependencies
+``` shell
+  npm install 
+```
+
 > Running in a development environment
 ``` shell
   npm start
