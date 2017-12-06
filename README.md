@@ -2,22 +2,22 @@
 
 * Electron
 
-> Installing Dependencies
+##### Installing Dependencies
 ``` shell
   npm install 
 ```
 
-> Running in a development environment
+##### Running in a development environment
 ``` shell
   npm start
 ```
 
-> Building for Windows
+##### Building for Windows
 ``` shell
   npm run build:win
 ```
 
-> Building for Mac
+##### Building for Mac
 ``` shell
   npm run build:mac
 ```
