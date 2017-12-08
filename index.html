@@ -132,8 +132,7 @@
             preencheSelectMinitos();
         }
         function mudaValorCronometro(event){
-            cronometro.innerHTML = new Date("2017","11", "24", "00", event.target.value, "00")
-                        .toLocaleTimeString('pt-br',{minute:'2-digit',second:'2-digit'});
+            cronometro.innerHTML = dateHandler(event.target.value);
         }
         function preencheSelectMinitos(){
             let options = [];
@@ -151,8 +150,7 @@
             options.map(option=>{
                 minutos.appendChild(option);
             })
-            cronometro.innerHTML = new Date("2017","11", "24", "00", minutos.value, "00")
-                        .toLocaleTimeString('pt-br',{minute:'2-digit',second:'2-digit'});
+            cronometro.innerHTML = dateHandler(minutos.value);
         }
         function dropArquivo(event){
             console.log(event)
@@ -221,8 +219,7 @@
             // audio.play();  
                 timeId = setInterval(()=>{
                     --i;
-                    time = new Date("2017","11", "24", "00", minutos.value, i.toString())
-                        .toLocaleTimeString('pt-br',{minute:'2-digit',second:'2-digit'});
+                    time = dateHandler(minutos.value, i.toString());
                     cronometro.innerHTML = time;
                     if(time.includes('00:00')){
                         reset()
@@ -247,6 +244,13 @@
         }
         function fullScreenOff(){
             ipcRenderer.send("fullScreen-main", {value:false})
+        }
+        function dateHandler(minutos, segundos = "00"){
+            return new Date(new Date().getFullYear(),
+                        new Date().getMonth(), 
+                        new Date().getDate(), 
+                        "00", minutos, segundos)
+                        .toLocaleTimeString('pt-br',{minute:'2-digit',second:'2-digit'});
         }
     </script>
 </body>
