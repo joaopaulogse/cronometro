@@ -28,6 +28,7 @@
         <p id="cronometro" align="center" style=" font-family: Calibri, 'Trebuchet MS', sans-serif">05:00</p>
     </div>
     <div align="right" id="footer">
+        <select id="minutos"></select>
         <button id="play" 
         style="background-color: Transparent;
                 background-repeat:no-repeat;
@@ -104,6 +105,7 @@
         let play = document.getElementById('play');
         let parar = document.getElementById("parar");
         let footer = document.getElementById('footer');
+        let minutos = document.getElementById("minutos");
         ipcRenderer.on("page", (event, args)=>{
             console.log(event)
             console.log("teste:",args)
@@ -114,17 +116,27 @@
                 reset();
             }
         })
-        // document.getElementById("dropImage").addEventListener('click', (event)=>{
-        //     event.preventDefault()
-        //     event.stopPropagation()
-        //     console.log(event)
-        // })
         function init(){
             window.onkeyup = window.teclado;
             window.onmousemove = window.mouseMove;
             window.onmouseout = window.mouseOut;
             window.ondblclick = window.fullScreen;
             window.ondrop = window.dropArquivo;
+            preencheSelectMinitos();
+        }
+        function preencheSelectMinitos(){
+            let options = [];
+            let values = Array(15).fill(1).map((v,i)=>v+i);
+            values.map(num=>{
+                let optionDinamic = document.createElement("option");
+                optionDinamic.value = num;
+                optionDinamic.innerHTML = num;
+                options.push(optionDinamic);
+            })
+            console.log(options);
+            options.map(option=>{
+                minutos.appendChild(option);
+            })
         }
         function dropArquivo(event){
             console.log(event)
@@ -155,10 +167,10 @@
                 audio.currentTime = event.target.duration - 60 * 5 // 5MINUTOS
             }
             audio.onplay = (event)=>{
-                start();
+                // start();
             }
             audio.onpause = (event)=>{
-                pause();
+                // pause();
             }
         }
         function envioImagem(event){
