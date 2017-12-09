@@ -31,7 +31,7 @@
 </head>
 <body style="background: black; color:white;" onload="init()">
     <div id="fundo">
-        <p id="cronometro" align="center" style=" font-family: Calibri, 'Trebuchet MS', sans-serif"></p>
+        <p id="cronometro" align="center" style="font-style: italic; font-family: Calibri, 'Trebuchet MS', sans-serif"></p>
     </div>
     <div align="right" id="footer">
         <button id="play" 
@@ -132,7 +132,11 @@
             preencheSelectMinitos();
         }
         function mudaValorCronometro(event){
-            cronometro.innerHTML = dateHandler(event.target.value);
+            if(event.target.value == 60){
+                cronometro.innerHTML = "01h";
+            }else{
+                cronometro.innerHTML = dateHandler(event.target.value);
+            }
         }
         function preencheSelectMinitos(){
             let options = [];
