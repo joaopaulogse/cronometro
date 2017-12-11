@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build:win": "electron-packager . Cronômetro --out ./release/windows --overwrite --icon=64x64.ico --platform=win32 --arch=x64 --app-version=1.3.0",
-    "build:mac": "electron-packager . Cronômetro --out ./release/mac --overwrite --icon=64x64.icns --platform=darwin --app-version=1.3.0"
+    "build:win": "electron-packager . Cronômetro --out ./release/windows --overwrite --icon=images/64x64.ico --platform=win32 --arch=x64 --app-version=1.3.0",
+    "build:mac": "electron-packager . Cronômetro --out ./release/mac --overwrite --icon=images/64x64.icns --platform=darwin --app-version=1.3.0"
   },
   "keywords": [],
   "author": "",

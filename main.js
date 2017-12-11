@@ -21,7 +21,7 @@ app.on('ready', ()=>{
     win = new BrowserWindow({
         width, 
         height, 
-        icon:path.join(__dirname, "64x64.png")
+        icon:path.join(__dirname, "images/64x64.png")
     });
     ipcMain.on('fullScreen-main', (event, args)=>{
         if(!win.isFullScreen()){
@@ -30,7 +30,7 @@ app.on('ready', ()=>{
             win.setFullScreen(false);
         }
     })
-    win.loadURL(`file://${__dirname}/index.html`)
+    win.loadURL(`file://${__dirname}/src/index.html`)
 })
 ipcMain.on("CtrlClock", (event, args)=>{
     // if(args.type == "start")
