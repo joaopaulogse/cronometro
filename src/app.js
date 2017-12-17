@@ -145,7 +145,7 @@ document.getElementById('fundo').appendChild(canvas);
 function initMp3Player(){
     // microfone.checked = false;
     cronometro.style.fontSize = "12vw"
-    cronometro.style.marginTop = "320px"
+    cronometro.style.margin = "22vw 22vw"
     audio.loop = true;
     context = new AudioContext();
     analyser = context.createAnalyser(); 
