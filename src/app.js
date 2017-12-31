@@ -3,13 +3,15 @@ let play = document.getElementById('play');
 let parar = document.getElementById("parar");
 let footer = document.getElementById('footer');
 let minutos = document.getElementById("minutos");
+let repeticao = document.getElementById("repeticao");
 function init(){
     window.onkeyup = window.teclado;
     window.onmousemove = window.mouseMove;
     window.onmouseout = window.mouseOut;
     window.ondblclick = window.fullScreen;
     window.ondrop = window.dropArquivo;
-    preencheSelectMinitos();
+    preencheSelect(minutos, 5,  60, true);
+    preencheSelect(repeticao, 1, 12, false, "x");
 }
 function mudaValorCronometro(event){
     if(event.target.value == 60){
@@ -18,23 +20,25 @@ function mudaValorCronometro(event){
         cronometro.innerHTML = dateHandler(event.target.value);
     }
 }
-function preencheSelectMinitos(){
+function preencheSelect(elemento, initialValue, quantidade, changeCronometro=false, valuePos=""){
     let options = [];
-    let values = Array(60).fill(1).map((v,i)=>v+i);
+    let values = Array(quantidade).fill(1).map((v,i)=>v+i);
     values.map(num=>{
         let optionDinamic = document.createElement("option");
         optionDinamic.value = num;
-        optionDinamic.innerHTML = num;
-        if(num == 5){
+        optionDinamic.innerHTML = num + valuePos;
+        if(num == initialValue){
             optionDinamic.selected = true
         }
         options.push(optionDinamic);
     })
     // console.log(options);
     options.map(option=>{
-        minutos.appendChild(option);
+        elemento.appendChild(option);
     })
-    cronometro.innerHTML = dateHandler(minutos.value);
+    if(changeCronometro){
+        cronometro.innerHTML = dateHandler(elemento.value);
+    }
 }
 function dropArquivo(event){
     console.log(event)
@@ -101,24 +105,37 @@ let i = 0;
 let time;
 function start(){
     // audio.play();  
-        timeId = setInterval(()=>{
-            --i;
-            time = dateHandler(minutos.value, i.toString());
-            cronometro.innerHTML = time;
-            if(time.includes('00:00')){
+    const firthValue = minutos.value;
+    timeId = setInterval(()=>{
+        --i;
+        time = dateHandler(minutos.value, i.toString());
+        cronometro.innerHTML = time;
+        // console.log(repeticao.value);
+        // console.log(firthValue);
+        for(let x of Array(9).fill(1).map((v,i)=>v+i)){ //FADEOUT 9 ULTIMOS SEGUNDOS, DA PARA COLOCAR DINAMICO
+            if(repeticao.value == 1 && time.includes(`00:0${x}`)){
+                audio.volume = ((audio.volume * 10 - 0.1 * 10)/10);// CALCULO FEITO PARA TIRAR A QUEBRA DO FLOAT EX.: 0.300000007
+            }
+        }
+        if(time.includes('00:00')){
+            if(repeticao.value == 1){
                 reset()
                 fullScreenOff()
+            }else{
+                repeticao.value -=1;
+                minutos.value = firthValue;
+                i = 0;
             }
-        }, 1000, timeId);
-        // audio.play()
-        play.hidden = true;
-        parar.hidden = false;
+        }
+    }, 1000, timeId);
+    play.hidden = true;
+    parar.hidden = false;
 }
 function pause(){
-        clearInterval(timeId);
-        // audio.pause();
-        play.hidden = false;
-        parar.hidden = true;
+    clearInterval(timeId);
+    // audio.pause();
+    play.hidden = false;
+    parar.hidden = true;
 }
 function reset(){
     window.location.reload();
@@ -145,7 +162,9 @@ document.getElementById('fundo').appendChild(canvas);
 function initMp3Player(){
     // microfone.checked = false;
     cronometro.style.fontSize = "12vw"
-    cronometro.style.margin = "22vw 22vw"
+    cronometro.style.top = "0px";
+    cronometro.style.marginTop = "22%"
+    cronometro.style.marginBottom = "88%"
     audio.loop = true;
     context = new AudioContext();
     analyser = context.createAnalyser(); 

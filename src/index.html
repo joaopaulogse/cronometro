@@ -28,6 +28,9 @@
             -ms-user-select: none;
             user-select: none;
         }
+        body{
+            overflow: hidden;
+        }
     </style>
 </head>
 <body style="background: black; color:white;" onload="init()">
@@ -101,6 +104,9 @@
                 </svg>
         </button>
         <br>
+        Repetir:
+        <select id="repeticao"></select>
+        Tempo:
         <select id="minutos" onchange="mudaValorCronometro(event)"></select>
         <br>
         <span id="tituloAudio" style="color:gray"></span>
