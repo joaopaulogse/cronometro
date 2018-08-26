@@ -1,40 +1,14 @@
-const electron = require("electron")
-const { app, BrowserWindow,ipcMain, ipcRenderer } = require("electron");
-const path = require("path");
-// const menubar = require("menubar")
-// let mb = menubar(
-//     {
-//         dir:process.cwd(), 
-//         index:`file://${__dirname}/menu.html`,
-//         width:200,
-//         height:200
-//     }  
-// );
-
-let win;
-// mb.on('ready', ()=>{
-//     // console.log('menu')
-// })
-
-app.on('ready', ()=>{
-    const {height,width} = electron.screen.getPrimaryDisplay().workAreaSize
-    win = new BrowserWindow({
-        width, 
-        height, 
-        icon:path.join(__dirname, "images/64x64.png")
-    });
-    ipcMain.on('fullScreen-main', (event, args)=>{
-        if(!win.isFullScreen()){
-            win.setFullScreen(args.value)
-        }else{
-            win.setFullScreen(false);
-        }
-    })
-    win.loadURL(`file://${__dirname}/src/index.html`)
+const menubar = require('menubar')
+const path = require('path');
+const mb = menubar({
+    index:`file://${__dirname}/src/menubar.html`,
+    height:180,
+    width:200,
+    resizable: true,
+    icon: path.join(__dirname, 'images', 'clock24px.png')
 })
-ipcMain.on("CtrlClock", (event, args)=>{
-    // if(args.type == "start")
-    console.log(args)
-    // console.log(event)
-    event.sender.send("page", {type:args.type});
+
+mb.on('ready', function ready () {
+  console.log('app is ready')
+  // your app code here
 })
