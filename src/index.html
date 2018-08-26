@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cronômetro</title>
+    <link rel="stylesheet" href="../node_modules/material-design-icons/iconfont/material-icons.css">
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css">
     <style>
         #cronometro{
             padding: 0px;
@@ -16,6 +18,9 @@
             bottom:0px;
             height:auto;
             width:100%;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
         }
         #cronometro{
             font-size: 40vw;
@@ -30,92 +35,21 @@
         }
         body{
             overflow: hidden;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
         }
     </style>
 </head>
-<body style="background: black; color:white;" onload="init()">
+<body style="background-color: rgba(0, 0, 0, 0);" onload="init()">
     <div id="fundo">
         <p id="cronometro" z-index="1" align="center" style="font-style: italic; font-family: Calibri, 'Trebuchet MS', sans-serif"></p>
     </div>
-    <div align="right" id="footer">
-        <button id="play" 
-        style="background-color: Transparent;
-                background-repeat:no-repeat;
-                border: none;
-                cursor:pointer;
-                overflow: hidden;
-                margin: 0px;
-                padding: 0px;" 
-                onclick="start()">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24" >
-                <path fill="white" d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z" />
-            </svg>
-        </button>
-        <button id="parar" 
-        hidden
-        style="background-color: Transparent;
-                background-repeat:no-repeat;
-                border: none;
-                cursor:pointer;
-                overflow: hidden;
-                margin: 0px;
-                padding: 0px;" 
-                onclick="pause()">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                <path fill="white" d="M13,16V8H15V16H13M9,16V8H11V16H9M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
-            </svg>
-        </button>
-        <button id="reset" 
-            style="background-color: Transparent;
-                    background-repeat:no-repeat;
-                    border: none;
-                    cursor:pointer;
-                    overflow: hidden;
-                    margin: 0px;
-                    padding: 0px;" 
-            onclick="reset()">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                <path fill="white" d="M11,4C13.05,4 15.09,4.77 16.65,6.33C19.78,9.46 19.77,14.5 16.64,17.64C14.81,19.5 12.3,20.24 9.91,19.92L10.44,17.96C12.15,18.12 13.93,17.54 15.24,16.23C17.58,13.89 17.58,10.09 15.24,7.75C14.06,6.57 12.53,6 11,6V10.58L6.04,5.63L11,0.68V4M5.34,17.65C2.7,15 2.3,11 4.11,7.94L5.59,9.41C4.5,11.64 4.91,14.39 6.75,16.23C7.27,16.75 7.87,17.16 8.5,17.45L8,19.4C7,19 6.12,18.43 5.34,17.65Z" />
-            </svg>
-        </button>
-        <label for="file" style="cursor: pointer;">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                <path fill="white" d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z" />
-            </svg>
-        </label>
-        <input type="file" hidden id="file" accept="audio/*,video/*" onchange="envioArquivo(event)">
-        <label for="image" style="cursor: pointer;">
-            <svg style="width:21px;height:21px" viewBox="0 0 24 24">
-                <path fill="white" d="M21,17H7V3H21M21,1H7A2,2 0 0,0 5,3V17A2,2 0 0,0 7,19H21A2,2 0 0,0 23,17V3A2,2 0 0,0 21,1M3,5H1V21A2,2 0 0,0 3,23H19V21H3M15.96,10.29L13.21,13.83L11.25,11.47L8.5,15H19.5L15.96,10.29Z" />
-            </svg>
-        </label>
-        <input type="file" hidden id="image" accept="image/*" multiple onchange="envioImagem(event)">
-        <button
-            style="background-color: Transparent;
-                    background-repeat:no-repeat;
-                    border: none;
-                    cursor:pointer;
-                    overflow: hidden;
-                    margin: 0px;
-                    padding: 0px;" 
-            onclick="fullScreen()">
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="white" d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" />
-                </svg>
-        </button>
-        <br>
-        Repetir:
-        <select id="repeticao"></select>
-        Tempo:
-        <select id="minutos" onchange="mudaValorCronometro(event)"></select>
-        <br>
-        <span id="tituloAudio" style="color:gray"></span>
-        <br>
-        <audio id="audio" controls hidden></audio>
-    </div>
+    <script src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="app.js"></script>
     <script>
         const { ipcRenderer, ipcMain } = require("electron")
+        
         ipcRenderer.on("page", (event, args)=>{
             console.log(event)
             console.log("teste:",args)
