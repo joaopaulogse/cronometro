@@ -2,8 +2,8 @@ const menubar = require('menubar')
 const path = require('path');
 const mb = menubar({
     index:`file://${__dirname}/src/menubar.html`,
-    height:180,
-    width:200,
+    height:200,
+    width:250,
     resizable: true,
     icon: path.join(__dirname, 'images', 'clock24px.png')
 })

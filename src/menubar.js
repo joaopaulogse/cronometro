@@ -55,6 +55,8 @@ function fullScreen(){
     if(!!win){
         isFullScreen = !isFullScreen;
         win.setFullScreen(isFullScreen)
+        win.flashFrame(false)
+        
     }
 }
 
